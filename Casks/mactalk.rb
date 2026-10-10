@@ -4,21 +4,25 @@ cask "mactalk" do
 
   url "https://github.com/nikolasfaria/mactalk/releases/download/v#{version}/MacTalk-#{version}.dmg"
   name "MacTalk"
-  desc "Push-to-talk dictation for macOS with on-device speech recognition"
+  desc "Push-to-talk dictation with on-device speech recognition"
   homepage "https://github.com/nikolasfaria/mactalk"
 
-  depends_on macos: ">= :sonoma"
   depends_on arch: :arm64
+  depends_on macos: :sonoma
 
   app "MacTalk.app"
-
-  # The app is ad-hoc signed (not notarized yet), so macOS would block it on first launch.
-  postflight do
-    system_command "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "#{appdir}/MacTalk.app"]
-  end
 
   zap trash: [
     "~/Library/Containers/com.niko.mactalk",
     "~/Library/Preferences/com.niko.mactalk.plist",
   ]
+
+  caveats <<~EOS
+    MacTalk is not notarized yet. If macOS blocks it on first launch, right-click the app
+    and choose Open, or run:
+
+      xattr -dr com.apple.quarantine /Applications/MacTalk.app
+
+    Grant Microphone when asked. Accessibility is optional (it enables auto-paste).
+  EOS
 end
