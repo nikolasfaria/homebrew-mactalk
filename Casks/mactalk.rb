@@ -1,6 +1,6 @@
 cask "mactalk" do
-  version "0.1.1"
-  sha256 "b279e29d6338d5f45b79df44f4390d1bc704621302b7c35c2ade3db7d3e86eb0"
+  version "0.1.2"
+  sha256 "9a589ab23bf123ac4ab8e8520f5a3a7884443e767054fbf51fd4740eac94ba8d"
 
   url "https://github.com/nikolasfaria/mactalk/releases/download/v#{version}/MacTalk-#{version}.dmg"
   name "MacTalk"
